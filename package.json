@@ -1,0 +1,24 @@
+{
+  "name": "Thirukkural",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "node": "8.1.1",
+    "npm": "5.0.3"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "server": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "lodash": "^4.17.11",
+    "mongoose": "^5.2.13",
+    "nodemon": "^1.18.4",
+    "path-parser": "^2.0.2"
+  }
+}
