@@ -2,18 +2,28 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
-const mongoURI = "mongodb://root:1330kural@ds257372.mlab.com:57372/thirukkural-prod";
+const config = require('./config/config');
 
 require('./models/Kural');
 
-mongoose.connect(mongoURI, { useNewUrlParser: true, useFindAndModify: false });
 mongoose.Promise = global.Promise;
+mongoose.connect(config.mongoURI, 
+        { useNewUrlParser: true, useFindAndModify: false , useUnifiedTopology: true }
+    ).then(() => {
+        console.log("Database Connected...")
+        init()
+    }).catch((err) => {
+        console.error("Database Connection error: ", err)
+        process.exit(1)
+    });
 
-const app = express();
+function init() {
+    const app = express();
 
-app.use(bodyParser.json());
+    app.use(bodyParser.json());
 
-require('./routes/mainRoutes')(app);
+    require('./routes/mainRoutes')(app);
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT);
+    const PORT = process.env.PORT || 5000;
+    app.listen(PORT, console.log(`Server started on port ${PORT}`));
+}

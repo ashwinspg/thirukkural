@@ -12,8 +12,6 @@ module.exports = app => {
     app.patch('/updateKural/:kuralNumber', async (req, res) => {
         const kuralNumber = req.params.kuralNumber;
         const { amma } = req.body;
-        console.log(kuralNumber);
-        console.log(amma);
         const kural = await Kural.findOneAndUpdate({ Number: kuralNumber }, {
             amma
         },{ new: true });
